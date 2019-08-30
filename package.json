@@ -1,0 +1,33 @@
+{
+  "name": "text-typing",
+  "version": "0.1.0",
+  "description": "Typewriter effect",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup --config rollup.config.js",
+    "test": "mocha -require @babel/register test/unitTest/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kapantzak/text-typing.git"
+  },
+  "author": "John Kapantzakis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kapantzak/text-typing/issues"
+  },
+  "homepage": "https://github.com/kapantzak/text-typing#readme",
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "rollup": "^1.20.3",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-uglify": "^6.0.3"
+  },
+  "dependencies": {}
+}
