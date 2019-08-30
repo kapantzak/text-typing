@@ -1,4 +1,4 @@
-import "../../bundle.js";
+import {textTyping} from "text-typing";
 
 document.addEventListener("DOMContentLoaded", () => {        
     init();
