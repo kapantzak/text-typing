@@ -1,8 +1,9 @@
+import "babel-polyfill";
 import { defaultOptions } from "./helpers/optionsHelper";
 import { lettersItterator } from "./helpers/asyncGeneratorHelper";
 import { getSpeed } from "./helpers/speedHelper";
 
-export default function textTyping(elem, options = {}) {
+export function textTyping(elem, options = {}) {
     
     const opt = Object.assign({}, defaultOptions, options);
 
@@ -20,7 +21,7 @@ export default function textTyping(elem, options = {}) {
             return this;
         },
         startTyping: async function() {            
-            if (text) {
+            if (opt.text) {
                 const speed = getSpeed(opt.speed);
                 const sequence = lettersItterator(opt.text, speed);
                 for await (const letter of sequence) {                    

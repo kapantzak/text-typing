@@ -1,11 +1,15 @@
 {
   "name": "text-typing",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Typewriter effect",
   "main": "index.js",
+  "files": [
+    "index.js"
+  ],
   "scripts": {
     "build": "rollup --config rollup.config.js",
-    "test": "mocha -require @babel/register test/unitTest/**/*.js"
+    "test": "mocha -require @babel/register test/unitTest/**/*.js",
+    "test:ui": "cd test/endUser && npm run build && npm run serve"
   },
   "repository": {
     "type": "git",
@@ -21,11 +25,11 @@
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/register": "^7.5.5",
+    "babel-polyfill": "^6.26.0",
     "chai": "^4.2.0",
     "mocha": "^6.2.0",
     "rollup": "^1.20.3",
     "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-uglify": "^6.0.3"
   },

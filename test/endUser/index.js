@@ -1,4 +1,5 @@
-import {textTyping} from "text-typing";
+//import {textTyping} from "text-typing";
+import {textTyping} from "../../index";
 
 document.addEventListener("DOMContentLoaded", () => {        
     init();
