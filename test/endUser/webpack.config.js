@@ -1,15 +1,16 @@
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {    
     mode: "development",
-    entry: "./index.js",
+    entry: "./src/index.js",
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "bundle.js"
     },
     devServer: {
-        contentBase: path.join(__dirname, ""),
+        contentBase: path.join(__dirname, "dist"),
         port: 8080,
         open: true
     },
@@ -23,7 +24,13 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin()        
+        new CleanWebpackPlugin(),
+        new CopyWebpackPlugin([            
+            {
+                from: "public",
+                to: ""
+            }
+        ])
     ],
     resolve: {
         extensions: [".js"]

@@ -1,5 +1,6 @@
 import babel from "rollup-plugin-babel";
 import nodeResolve from "rollup-plugin-node-resolve";
+import postcss from "rollup-plugin-postcss";
 import {uglify} from "rollup-plugin-uglify";
 
 export default {
@@ -9,6 +10,9 @@ export default {
         format: "cjs"
     },
     plugins: [
+        postcss({
+            extensions: [".css"]
+        }),
         babel({
             exclude: "node_modules/**"
         }),

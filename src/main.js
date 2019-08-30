@@ -1,7 +1,8 @@
 import "babel-polyfill";
 import { defaultOptions } from "./helpers/optionsHelper";
-import { lettersItterator } from "./helpers/asyncGeneratorHelper";
+import { lettersItterator, asyncLetter } from "./helpers/asyncGeneratorHelper";
 import { getSpeed } from "./helpers/speedHelper";
+import "./css/style.css";
 
 export function textTyping(elem, options = {}) {
     
@@ -20,15 +21,31 @@ export function textTyping(elem, options = {}) {
             elem.appendChild(cursor);
             return this;
         },
-        startTyping: async function() {            
-            if (opt.text) {
+        typeText: async function({ text, speed = opt.speed }) {
+            if (text) {
                 const speed = getSpeed(opt.speed);
-                const sequence = lettersItterator(opt.text, speed);
+                const sequence = lettersItterator(text, speed);
                 for await (const letter of sequence) {                    
-                    mainTextHolder.innerHTML = mainTextHolder.innerHTML + letter;                    
+                    updateText(mainTextHolder, letter);
                 }
             }
-            return this;
+            const inst = this;
+            return new Promise(resolve => resolve(inst));
+        },
+        delete: async function({ num, speed }) {
+            mainTextHolder.innerHTML = mainTextHolder.innerHTML.split("").slice(num).join("");
+            const inst = this;
+            return new Promise(resolve => resolve(inst));
+        },
+        backspace: async function({ num, speed }) {
+            const arr = mainTextHolder.innerHTML.split("");
+            mainTextHolder.innerHTML = arr.slice(0, arr.length - num).join("");
+            const inst = this;
+            return new Promise(resolve => resolve(inst));
         }
     }
+}
+
+function updateText(mainTextHolder, newText) {
+    mainTextHolder.innerHTML = mainTextHolder.innerHTML + newText;                    
 }

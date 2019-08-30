@@ -7,10 +7,10 @@ export async function* lettersItterator(text, speed) {
     }    
 }
 
-function asyncLetter(letter, time) {
+export function asyncLetter(letter, time) {
     return new Promise(resolve => {
         setTimeout(() => {            
             resolve(letter);
-        }, Math.random() * time);
+        }, time);
     });
 }
