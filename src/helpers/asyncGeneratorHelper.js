@@ -1,16 +1,37 @@
-export async function* lettersItterator(text, speed) {    
-    const letters = text.split("");
-    const s = speed || 100;        
+import { getSpeed } from "./speedHelper";
+
+export async function* lettersIterator({ text, speed }) {    
+    const letters = text.split("");    
     while (letters.length > 0) {        
-        const newLetter = await asyncLetter(letters.splice(0,1)[0], s);
+        const newLetter = await asyncLetter({
+            letter: letters.splice(0,1)[0],
+            speed
+        });
         yield newLetter;
     }    
 }
 
-export function asyncLetter(letter, time) {
+function asyncLetter({ letter, speed }) {    
+    const s = getSpeed(speed);
     return new Promise(resolve => {
         setTimeout(() => {            
             resolve(letter);
-        }, time);
+        }, s);
+    });
+}
+
+export async function* actionIterator({ iterations, speed }) {    
+    while (iterations > 0) {
+        await asyncAction(speed);
+        yield iterations--;
+    }    
+}
+
+function asyncAction(speed) {    
+    const s = getSpeed(speed);    
+    return new Promise(resolve => {
+        setTimeout(() => {            
+            resolve();
+        }, s);
     });
 }

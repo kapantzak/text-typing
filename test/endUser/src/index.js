@@ -5,16 +5,15 @@ document.addEventListener("DOMContentLoaded", () => {
     init();
 });
 
-function init() {
+async function init() {
     const h1 = document.getElementById("header_1");
-    const h1Typing = textTyping(h1, {
-        text: "Hello world",
+    const txt = textTyping(h1, {
         speed: [100, 500]
-    }).init().typeText({
-        text: "Hello World!!!"
-    }).then(inst => {
-        inst.delete(1).then(inst => {
-            inst.backspace(2);
-        });
     });
+    
+    await txt.typeText("Hello");
+    await txt.lineBreak();
+    await txt.typeText("world");
+    await txt.delete(2);
+    await txt.backspace(2, 1000);
 }
