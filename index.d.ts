@@ -15,6 +15,7 @@ declare namespace TTP {
     export interface ITextTyping {
         typeText?: (text: string, speed?: number | number[]) => Promise<TTP.textTyping>;
         lineBreak?: () => Promise<TTP.textTyping>;
+        injectHTML?: (htmlElement: HTMLElement, speed: number | number[]) => Promise<TTP.textTyping>;
         delete?: (iterations: number, speed?: number | number[]) => Promise<TTP.textTyping>;
         backspace?: (iterations: number, speed?: number | number[]) => Promise<TTP.textTyping>;
         moveCursor?: (point: string) => Promise<TTP.textTyping>;
