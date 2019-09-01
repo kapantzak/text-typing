@@ -27,7 +27,7 @@ export async function* actionIterator({ iterations, speed }) {
     }    
 }
 
-function asyncAction(speed) {    
+export function asyncAction(speed) {    
     const s = getSpeed(speed);    
     return new Promise(resolve => {
         setTimeout(() => {            
