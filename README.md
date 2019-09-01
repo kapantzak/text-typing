@@ -3,6 +3,8 @@
 # text-typing
 A tool for creating typwriter effect, with a simple, promise based api.
 
+![text-typing gif](img/text-typing.gif?raw=true "text-typing")
+
 ## Installation
 
 Install npm package

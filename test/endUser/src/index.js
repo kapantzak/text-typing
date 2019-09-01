@@ -2,7 +2,9 @@
 import {textTyping} from "../../../index";
 
 document.addEventListener("DOMContentLoaded", () => {        
-    init();
+    setTimeout(() => {
+        init();
+    }, 1000);    
 });
 
 async function init() {
@@ -11,9 +13,15 @@ async function init() {
         speed: [100, 500]
     });
     
-    await txt.typeText("Hello");
+    await txt.typeText("Helo");
+    await txt.backspace(2);
+    await txt.typeText("llo");
     await txt.lineBreak();
-    await txt.typeText("world");
-    await txt.delete(2);
-    await txt.backspace(2, 1000);
+    await txt.typeText("text-typing");
+    //await txt.delete(7);    
+
+    const html = document.createElement("span");
+    html.innerHTML = "&#9995;";
+    await txt.injectHTML(html);
+    //await txt.backspace(7);
 }

@@ -1,13 +1,13 @@
 import "babel-polyfill";
-import { defaultOptions } from "./helpers/optionsHelper";
-import { lettersIterator, actionIterator } from "./helpers/asyncGeneratorHelper";
+import { defaultOptions, defaults } from "./helpers/defaultsHelper";
+import { lettersIterator, actionIterator, asyncAction } from "./helpers/asyncGeneratorHelper";
 import "./css/style.css";
 
 export function textTyping(elem, options = {}) {
     
     const opt = Object.assign({}, defaultOptions, options);
-
-    const rows = [];
+    
+    const items = [];
 
     const cursor = document.createElement("span");
     cursor.classList.add("fake-cursor");
@@ -17,71 +17,96 @@ export function textTyping(elem, options = {}) {
     return {
         typeText: async function(text, speed = opt.speed) {
             if (text) {    
-                const row = newRow({
+                const section = newSection({
                     elem,
                     cursor
                 });
-                rows.push(row);
+                items.push(section);
                 const sequence = lettersIterator({
                     text,
                     speed
                 });
                 for await (const letter of sequence) {
-                    row.innerHTML = row.innerHTML + letter;
+                    section.innerHTML = section.innerHTML + letter;
                 }
             }
-            const inst = this;
-            return new Promise(resolve => resolve(inst));
+            return this;
         },
         lineBreak: async function() {
-            const lastRow = rows[rows.length - 1];
+            const lastSection = items[items.length - 1];
             const br = document.createElement("br");
-            elem.insertBefore(br, lastRow.nextSibling);
-            const inst = this;
-            return new Promise(resolve => resolve(inst));
+            items.push(br);
+            elem.insertBefore(br, lastSection.nextSibling);            
+            return this;
+        },
+        injectHTML: async function(htmlElement, speed = opt.speed) {
+            const lastSection = items[items.length - 1];
+            items.push(htmlElement);
+            await asyncAction(speed);
+            elem.insertBefore(htmlElement, lastSection.nextSibling);
+            return this;
         },
         delete: async function(iterations, speed = opt.speed) {
-            const firstRow = rows[0];
+            let firstSection = items[0];
             const sequence = actionIterator({
                 iterations,
                 speed
             });
             this.moveCursor("start");
             for await (const iterationNum of sequence) {
-                firstRow.innerHTML = firstRow.innerHTML.split("").slice(1).join("");
+                if (firstSection.innerHTML.length === 0) {
+                    const f = items[0];
+                    f.parentNode.removeChild(f);
+                    items.shift();
+                    while (!items[0].classList.contains(defaults.sectionClass)) {
+                        const ff = items[0];
+                        ff.parentNode.removeChild(ff);
+                        items.shift();
+                    }
+                    firstSection = items[0];
+                }                    
+                firstSection.innerHTML = firstSection.innerHTML.split("").slice(1).join("");
             }
-            const inst = this;
-            return new Promise(resolve => resolve(inst));
+            return this;
         },
         backspace: async function(iterations, speed = opt.speed) {
-            const lastRow = rows[rows.length - 1];
+            let lastSection = items[items.length - 1];
             const sequence = actionIterator({
                 iterations,
                 speed
             });
             this.moveCursor("end");
             for await (const iterationNum of sequence) {
-                const arr = lastRow.innerHTML.split("");
-                lastRow.innerHTML = arr.slice(0,arr.length - 1).join("");
+                if (lastSection.innerHTML.length === 0) {
+                    const l = items[items.length - 1];
+                    l.parentNode.removeChild(l);
+                    items.pop();
+                    while (!items[items.length - 1].classList.contains(defaults.sectionClass)) {
+                        const ll = items[items.length - 1];
+                        ll.parentNode.removeChild(ll);
+                        items.pop();
+                    }
+                    lastSection = items[items.length - 1];
+                }
+                const arr = lastSection.innerHTML.split("");
+                lastSection.innerHTML = arr.slice(0,arr.length - 1).join("");
             }
-            const inst = this;
-            return new Promise(resolve => resolve(inst));
+            return this;
         },
         moveCursor: async function(point) {
             if (point === "start") {
-                elem.insertBefore(cursor, rows[0]);
+                elem.insertBefore(cursor, items[0]);
             } else {
                 elem.appendChild(cursor);
             }
-            const inst = this;
-            return new Promise(resolve => resolve(inst));
+            return this;
         }
     }
 }
 
-function newRow({ elem, cursor }) {
-    const row = document.createElement("span");
-    row.classList.add("tt-row");
-    elem.insertBefore(row, cursor);
-    return row;
+function newSection({ elem, cursor }) {
+    const section = document.createElement("span");
+    section.classList.add(defaults.sectionClass);
+    elem.insertBefore(section, cursor);
+    return section;
 }

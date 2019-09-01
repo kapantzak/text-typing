@@ -3,8 +3,10 @@
   "version": "0.2.0",
   "description": "Typewriter effect",
   "main": "index.js",
+  "types": "index.d.ts",
   "files": [
-    "index.js"
+    "index.js",
+    "index.d.ts"
   ],
   "scripts": {
     "build": "rollup --config rollup.config.js",
