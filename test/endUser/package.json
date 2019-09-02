@@ -24,6 +24,6 @@
     "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
-    "text-typing": "^0.1.1"
+    "text-typing": "^0.3.0"
   }
 }

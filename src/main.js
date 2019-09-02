@@ -15,11 +15,12 @@ export function textTyping(elem, options = {}) {
     elem.appendChild(cursor);
     
     return {
-        typeText: async function(text, speed = opt.speed) {
+        typeText: async function(text, className = null, speed = opt.speed) {
             if (text) {    
                 const section = newSection({
                     elem,
-                    cursor
+                    cursor,
+                    className
                 });
                 items.push(section);
                 const sequence = lettersIterator({
@@ -104,9 +105,12 @@ export function textTyping(elem, options = {}) {
     }
 }
 
-function newSection({ elem, cursor }) {
-    const section = document.createElement("span");
+function newSection({ elem, cursor, className }) {
+    const section = document.createElement("span");    
     section.classList.add(defaults.sectionClass);
+    if (className) {
+        section.classList.add(className);
+    }
     elem.insertBefore(section, cursor);
     return section;
 }

@@ -1,6 +1,6 @@
 {
   "name": "text-typing",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Typewriter effect",
   "main": "index.js",
   "types": "index.d.ts",
@@ -17,6 +17,15 @@
     "type": "git",
     "url": "git+https://github.com/kapantzak/text-typing.git"
   },
+  "keywords": [
+    "javascript",
+    "js",
+    "typewriter",
+    "type",
+    "text",
+    "write",
+    "effect"
+  ],
   "author": "John Kapantzakis",
   "license": "ISC",
   "bugs": {

@@ -4767,10 +4767,10 @@ terser@^4.1.2:
     source-map "~0.6.1"
     source-map-support "~0.5.12"
 
-text-typing@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/text-typing/-/text-typing-0.1.1.tgz#e914182bae1843abf525ba65a63eec47d83ec2a1"
-  integrity sha512-fQuCwXvdCH6E1R8R2Ojpq21YVHR2dpB0EVR/hLVu2mfA6Fonj5QO16ftbxe/2UKQb6RhuFL3ouPAhjw5meDVcQ==
+text-typing@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/text-typing/-/text-typing-0.3.0.tgz#fd7acae525c32c487f571b00c224031efcfd7345"
+  integrity sha512-AX7j0ZM0+9MwC3nr1neQDHWU2FK5bLM1shwLhdh461eK+tOWurLpq1IW7OHjMEgvfOI080BlvArhB2lNXg4qdg==
 
 through2@^2.0.0:
   version "2.0.5"

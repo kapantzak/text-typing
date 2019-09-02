@@ -17,7 +17,7 @@ async function init() {
     await txt.backspace(2);
     await txt.typeText("llo");
     await txt.lineBreak();
-    await txt.typeText("text-typing");
+    await txt.typeText("text-typing", "custom-text");
     //await txt.delete(7);    
 
     const html = document.createElement("span");

@@ -1,5 +1,13 @@
 # Change Log
 
+## [v0.4.0] - 2019-09-02
+### Added
+- `className` parameter to `typeText()` method
+- Added keywords to `package.json`
+
+### Changed
+- README.md
+
 ## [v0.3.0] - 2019-09-02
 ### Added
 - Typescript declaration file
@@ -34,6 +42,7 @@
 - rollup.config.js
 
 
+[v0.4.0]: https://github.com/kapantzak/text-typing/compare/v0.3.0...v0.4.0
 [v0.3.0]: https://github.com/kapantzak/text-typing/compare/v0.2.0...v0.3.0
 [v0.2.0]: https://github.com/kapantzak/text-typing/compare/v0.1.2...v0.2.0
 [v0.1.2]: https://github.com/kapantzak/text-typing/compare/v0.1.1...v0.1.2
