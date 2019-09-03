@@ -34,17 +34,15 @@ export function textTyping(elem, options = {}) {
             return this;
         },
         lineBreak: async function() {
-            const lastSection = items[items.length - 1];
             const br = document.createElement("br");
-            items.push(br);
-            elem.insertBefore(br, lastSection.nextSibling);            
+            items.push(br);            
+            elem.insertBefore(br, cursor);
             return this;
         },
         injectHTML: async function(htmlElement, speed = opt.speed) {
-            const lastSection = items[items.length - 1];
             items.push(htmlElement);
             await asyncAction(speed);
-            elem.insertBefore(htmlElement, lastSection.nextSibling);
+            elem.insertBefore(htmlElement, cursor);
             return this;
         },
         delete: async function(iterations, speed = opt.speed) {
@@ -55,19 +53,22 @@ export function textTyping(elem, options = {}) {
             });
             this.moveCursor("start");
             for await (const iterationNum of sequence) {
-                if (firstSection.innerHTML.length === 0) {
-                    const f = items[0];
-                    f.parentNode.removeChild(f);
-                    items.shift();
-                    while (!items[0].classList.contains(defaults.sectionClass)) {
-                        const ff = items[0];
-                        ff.parentNode.removeChild(ff);
-                        items.shift();
-                    }
-                    firstSection = items[0];
-                }                    
                 firstSection.innerHTML = firstSection.innerHTML.split("").slice(1).join("");
-            }
+                if (firstSection.innerHTML.length === 0) {
+                    firstSection.parentNode.removeChild(firstSection);
+                    items.shift();
+                    if (items.length > 0) {
+                        while (!items[0].classList.contains(defaults.sectionClass)) {
+                            const ff = items[0];
+                            ff.parentNode.removeChild(ff);
+                            items.shift();
+                        }
+                        firstSection = items[0];
+                    } else {
+                        break;
+                    }
+                }
+            }            
             return this;
         },
         backspace: async function(iterations, speed = opt.speed) {
@@ -77,21 +78,24 @@ export function textTyping(elem, options = {}) {
                 speed
             });
             this.moveCursor("end");
-            for await (const iterationNum of sequence) {
-                if (lastSection.innerHTML.length === 0) {
-                    const l = items[items.length - 1];
-                    l.parentNode.removeChild(l);
-                    items.pop();
-                    while (!items[items.length - 1].classList.contains(defaults.sectionClass)) {
-                        const ll = items[items.length - 1];
-                        ll.parentNode.removeChild(ll);
-                        items.pop();
-                    }
-                    lastSection = items[items.length - 1];
-                }
+            for await (const iterationNum of sequence) {                
                 const arr = lastSection.innerHTML.split("");
                 lastSection.innerHTML = arr.slice(0,arr.length - 1).join("");
-            }
+                if (lastSection.innerHTML.length === 0) {
+                    lastSection.parentNode.removeChild(lastSection);
+                    items.pop();
+                    if (items.length > 0) {
+                        while (!items[items.length - 1].classList.contains(defaults.sectionClass)) {
+                            const ll = items[items.length - 1];
+                            ll.parentNode.removeChild(ll);
+                            items.pop();
+                        }
+                        lastSection = items[items.length - 1];
+                    } else {
+                        break;
+                    }
+                }
+            }            
             return this;
         },
         moveCursor: async function(point) {
@@ -101,6 +105,10 @@ export function textTyping(elem, options = {}) {
                 elem.appendChild(cursor);
             }
             return this;
+        },
+        sleep: function(speed) {
+            const inst = this;
+            return asyncAction(speed, inst);
         }
     }
 }
