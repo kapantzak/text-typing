@@ -109,7 +109,11 @@ function newSection({ elem, cursor, className }) {
     const section = document.createElement("span");    
     section.classList.add(defaults.sectionClass);
     if (className) {
-        section.classList.add(className);
+        className.split(" ")
+        .map(x => x.trim())
+        .forEach(c => {
+            section.classList.add(c);
+        });
     }
     elem.insertBefore(section, cursor);
     return section;
