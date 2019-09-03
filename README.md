@@ -36,6 +36,26 @@ All you need to do is to initialize the tool, passing a reference to an existing
       await txt.typeText("Hello");
     })();    
 
+#### Chaining methods
+You can call multiple methods on the same instance, either by using `await` (inside an `async` function), or by using `then` after a method call
+
+##### await
+
+    (async () => {      
+      const txt = textTyping(elem);
+      await txt.typeText("Hello");
+	  await txt.backspace(2);
+    })();
+
+##### then
+
+    (() => {
+      const txt = textTyping(elem);
+      txt.typeText("Hello").then(resp => {
+        resp.backspace(2);
+      });
+    })();
+
 ## Options
 
 ### speed
@@ -70,7 +90,7 @@ Start typing the specified text in the given speed (if speed is not provided, th
 
 ##### Parameters
 - ***text*** `<string>`: The text to be typed
-- ***className*** `<string>`: An optional class or set of classes to be applied
+- ***className*** `<string>`: An optional class or set of classes to be applied (If you want to add multiple classes, separate them with space)
 - ***speed*** *optional* `<number> | <number[]>`: The typing speed
 
 ##### Return value

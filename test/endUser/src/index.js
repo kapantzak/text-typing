@@ -17,11 +17,10 @@ async function init() {
     await txt.backspace(2);
     await txt.typeText("llo");
     await txt.lineBreak();
-    await txt.typeText("text-typing", "custom-text");
-    //await txt.delete(7);    
-
+    await txt.typeText("text-typing", "custom-text text-lg");
+    
     const html = document.createElement("span");
     html.innerHTML = "&#9995;";
     await txt.injectHTML(html);
-    //await txt.backspace(7);
+    
 }

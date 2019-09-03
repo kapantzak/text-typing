@@ -1,5 +1,12 @@
 # Change Log
 
+## [v0.4.1] - 2019-09-03
+### Fixed
+- Adding multiple classes (separated by space) to `typeText()` method
+
+### Changed
+- README.md
+
 ## [v0.4.0] - 2019-09-02
 ### Added
 - `className` parameter to `typeText()` method
@@ -42,6 +49,7 @@
 - rollup.config.js
 
 
+[v0.4.1]: https://github.com/kapantzak/text-typing/compare/v0.4.0...v0.4.1
 [v0.4.0]: https://github.com/kapantzak/text-typing/compare/v0.3.0...v0.4.0
 [v0.3.0]: https://github.com/kapantzak/text-typing/compare/v0.2.0...v0.3.0
 [v0.2.0]: https://github.com/kapantzak/text-typing/compare/v0.1.2...v0.2.0
