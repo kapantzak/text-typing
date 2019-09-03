@@ -106,9 +106,9 @@ export function textTyping(elem, options = {}) {
             }
             return this;
         },
-        sleep: function(speed) {
-            const inst = this;
-            return asyncAction(speed, inst);
+        sleep: async function(speed) {            
+            await asyncAction(speed);
+            return this;
         }
     }
 }
