@@ -13,9 +13,10 @@ async function init() {
         speed: [100, 500]
     });
     
-    await txt.typeText("Helo");
-    await txt.backspace(2);
-    await txt.typeText("llo");
+    await txt.typeText("Hello");  
+    await txt.sleep(1000);  
+    await txt.typeText(" test");
+    await txt.backspace(65);
     await txt.lineBreak();
     await txt.typeText("text-typing", "custom-text text-lg");
     

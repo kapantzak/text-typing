@@ -1,6 +1,6 @@
 {
   "name": "text-typing",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Typewriter effect",
   "main": "index.js",
   "types": "index.d.ts",

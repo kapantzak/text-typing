@@ -164,5 +164,18 @@ Place the cursor either at the begining or at the end of the text
 ##### Return value
 - `Promise`
 
+
+### sleep()
+Stop the execution for the given time
+
+##### Syntax
+    txt.sleep(speed)
+
+##### Parameters
+- ***speed*** *optional* `<number> | <number[]>`: The time of pause in milliseconds
+
+##### Return value
+- `Promise`
+
 ## Changelog
 Checkout the **[CHANGELOG](https://github.com/kapantzak/text-typing/blob/master/CHANGELOG.md "CHANGELOG")** file
